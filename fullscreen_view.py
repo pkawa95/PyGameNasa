@@ -1,3 +1,4 @@
+#Piotr Kawa - 78228 - WZ_ININ4_PR1
 import pygame
 import json
 

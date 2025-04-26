@@ -1,6 +1,7 @@
+#Piotr Kawa - 78228 - WZ_ININ4_PR1
 import pygame
 
-# Stałe
+
 THUMBNAIL_SIZE = (200, 200)
 SPACING = 50
 FONT_SIZE = 24

@@ -1,10 +1,11 @@
+#Piotr Kawa - 78228 - WZ_ININ4_PR1
 import requests
 import threading
 import pygame
 from io import BytesIO
 import time
 
-# Stałe
+# Rozmiar miniatur
 THUMBNAIL_SIZE = (200, 200)
 
 class ImageData:
@@ -59,5 +60,5 @@ class ImageLoader:
                 self.images.append(ImageData(thumbnail, title, description, date_created))
             except Exception as e:
                 print(f"Błąd pobierania obrazu: {e}")
-            time.sleep(0.1)  # Mała pauza żeby nie zasypać NASA API
+            time.sleep(0.1)
         self.loading = False
