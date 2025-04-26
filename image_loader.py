@@ -5,7 +5,6 @@ import pygame
 from io import BytesIO
 import time
 
-# Rozmiar miniatur
 THUMBNAIL_SIZE = (200, 200)
 
 class ImageData:

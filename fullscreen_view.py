@@ -18,7 +18,7 @@ class FullscreenView:
 
         image_data = self.images[self.selected_index]
 
-        # Wyświetlenie obrazu po lewej
+
         original = image_data.surface
         image_rect = original.get_rect()
         max_width = SCREEN_WIDTH // 2 - 50
@@ -32,8 +32,7 @@ class FullscreenView:
         y = (SCREEN_HEIGHT - new_size[1]) // 2
         screen.blit(image, (x, y))
 
-        # Przygotowanie bardziej szczegółowego JSON-a
-        # UWAGA: W image_data potrzebne będą dodatkowe pola!
+
         json_info = {
             "title": image_data.title,
             "description": getattr(image_data, "description", "Brak opisu"),
@@ -49,7 +48,7 @@ class FullscreenView:
             screen.blit(line_surface, (start_x, start_y))
             start_y += 30
 
-        # Wyświetlenie legendy na dole
+        #Wyswietlanie legendyt
         legend_text = "ESC - wyjście    ←/→ - zmiana zdjęcia"
         legend_surface = self.font.render(legend_text, True, WHITE)
         legend_rect = legend_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40))

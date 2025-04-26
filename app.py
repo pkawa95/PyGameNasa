@@ -78,7 +78,6 @@ class App:
                             self.gallery.handle_input(event.key)
 
     def search_new_query(self, query):
-        # Reset wszystkiego
         self.loader = ImageLoader()
         self.gallery = Gallery(self.loader.images)
         self.loader.fetch_image_urls(query=query)

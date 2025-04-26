@@ -16,11 +16,11 @@ class Gallery:
         self.images = images
         self.selected_index = 0
         self.current_page = 0
-        self.font = pygame.font.SysFont("Courier", FONT_SIZE)   # Główna czcionka (np. legenda, loading, input)
-        self.title_font = pygame.font.SysFont("Courier", 18, bold=True)  # Czcionka podpisów miniatur (mniejsza + bold)
+        self.font = pygame.font.SysFont("Courier", FONT_SIZE)   # Główna czcionka
+        self.title_font = pygame.font.SysFont("Courier", 18, bold=True)  # Czcionka podpisów miniatur
 
         self.columns = SCREEN_WIDTH // (THUMBNAIL_SIZE[0] + SPACING)
-        self.rows = (SCREEN_HEIGHT - 180) // (THUMBNAIL_SIZE[1] + SPACING)  # 180px na legendę, loading, input
+        self.rows = (SCREEN_HEIGHT - 180) // (THUMBNAIL_SIZE[1] + SPACING)  # legenda, loading, input
         self.images_per_page = self.columns * self.rows
 
     def handle_input(self, key):
@@ -49,20 +49,20 @@ class Gallery:
     def draw(self, screen, loading, input_active=False, user_input_text=""):
         screen.fill(BLACK)
 
-        # --- Rysujemy legendę ---
+        #Legenda
         legend_text = "[A] Poprzednia strona   [D] Następna strona   [Enter] Powiększ obraz   [Esc] Wyjście   [F] Wyszukiwanie"
         legend_surface = self.font.render(legend_text, True, WHITE)
         legend_rect = legend_surface.get_rect(center=(SCREEN_WIDTH // 2, 30))
         screen.blit(legend_surface, legend_rect)
 
-        # --- Jeśli ładowanie trwa, pokazujemy napis ---
+        #Ładowanie
         if loading:
             loading_text = "LOADING..."
             loading_surface = self.font.render(loading_text, True, BLUE)
             loading_rect = loading_surface.get_rect(center=(SCREEN_WIDTH // 2, 70))
             screen.blit(loading_surface, loading_rect)
 
-        # --- Rysujemy miniaturki + tytuły ---
+        #Rysowanie miniaturek
         images_to_draw = self.images_on_page()
 
         for idx, img_data in enumerate(images_to_draw):
@@ -76,11 +76,11 @@ class Gallery:
 
             screen.blit(img_data.surface, (x, y))
 
-            # podpis pod miniaturką
+            #Podpis pod mini
             title_surface = self.title_font.render(img_data.title[:20], True, BLUE)
             screen.blit(title_surface, (x, y + THUMBNAIL_SIZE[1] + 5))
 
-        # --- Rysujemy informację o stronie ---
+        #iffromacje o stronie
         if self.images:
             total_pages = max(1, (len(self.images) + self.images_per_page - 1) // self.images_per_page)
             page_info_text = f"Strona {self.current_page + 1}/{total_pages}"
@@ -88,8 +88,8 @@ class Gallery:
             page_info_rect = page_info_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 70))
             screen.blit(page_info_surface, page_info_rect)
 
-        # --- Rysujemy input box do wpisywania wyszukiwania ---
-        input_box = pygame.Rect(SCREEN_WIDTH // 2 - 200, SCREEN_HEIGHT - 50, 400, 30)
+        #inputbox wyszukiwanie
+        input_box = pygame.Rect(SCREEN_WIDTH // 2 - 200, SCREEN_HEIGHT - 50, 530, 30)
         pygame.draw.rect(screen, BLUE, input_box, 2)
 
         if input_active:
@@ -97,4 +97,9 @@ class Gallery:
         else:
             input_text_surface = self.font.render("Wciśnij [F], aby wpisać zapytanie...", True, WHITE)
 
+        author_text = "Piotr Kawa - 78228 - WZ_ININ4_PR1"
+        author_surface = self.title_font.render(author_text, True, BLUE)
+        screen.blit(author_surface, (10, SCREEN_HEIGHT - 40))
+
         screen.blit(input_text_surface, (input_box.x + 10, input_box.y + 5))
+
