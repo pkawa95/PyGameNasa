@@ -1,4 +1,3 @@
-#Piotr Kawa - 78228 - WZ_ININ4_PR1
 import pygame
 import json
 
@@ -18,8 +17,8 @@ class FullscreenView:
 
         image_data = self.images[self.selected_index]
 
-
-        original = image_data.surface
+        # Wyświetlenie obrazu po lewej
+        original = image_data.full_image  # <-- teraz używamy pełnego obrazu!
         image_rect = original.get_rect()
         max_width = SCREEN_WIDTH // 2 - 50
         max_height = SCREEN_HEIGHT - 150
@@ -32,11 +31,11 @@ class FullscreenView:
         y = (SCREEN_HEIGHT - new_size[1]) // 2
         screen.blit(image, (x, y))
 
-
+        # Wyświetlenie JSON po prawej
         json_info = {
             "title": image_data.title,
-            "description": getattr(image_data, "description", "Brak opisu"),
-            "date_created": getattr(image_data, "date_created", "Brak daty")
+            "description": image_data.description,
+            "date_created": image_data.date_created
         }
         json_text = json.dumps(json_info, indent=4, ensure_ascii=False)
 
@@ -48,7 +47,7 @@ class FullscreenView:
             screen.blit(line_surface, (start_x, start_y))
             start_y += 30
 
-        #Wyswietlanie legendyt
+        # Wyświetlenie legendy na dole
         legend_text = "ESC - wyjście    ←/→ - zmiana zdjęcia"
         legend_surface = self.font.render(legend_text, True, WHITE)
         legend_rect = legend_surface.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40))
